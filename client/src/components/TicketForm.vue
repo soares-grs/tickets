@@ -10,6 +10,8 @@ import FloatLabel from 'primevue/floatlabel'
 import Button from 'primevue/button'
 import ConfirmPopup from 'primevue/confirmpopup'
 
+const emit = defineEmits(['created'])
+
 const { showSuccess, showError } = useToast()
 const confirm = useConfirm()
 
@@ -29,6 +31,7 @@ async function createTicket() {
   try {
     await axios.post(`${import.meta.env.VITE_BASE_URL}/ticket`, ticket)
     showSuccess('Ticket criado com sucesso!', 'Você pode visualizar ele na tela de tickets')
+    emit('created')
   } catch (erro) {
     showError('Não foi possível criar o ticket', erro)
   } finally {
@@ -70,7 +73,9 @@ const confirmCreateTicket = (event: any) => {
     acceptProps: {
       label: 'Sim'
     },
-    accept: () => { createTicket() },
+    accept: () => {
+      createTicket()
+    },
     reject: () => {}
   })
 }
