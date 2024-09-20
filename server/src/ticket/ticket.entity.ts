@@ -10,4 +10,10 @@ export class Ticket {
 
   @Column()
   description: string;
+
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  dateCreated: Date;
+
+  @Column({ default: false })
+  isConcluded: boolean;
 }

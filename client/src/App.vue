@@ -6,7 +6,7 @@ import router from './router';
 
 const items = ref([
   {
-    label: 'Home',
+    label: 'Início',
     icon: 'pi pi-home',
     command: () => {
       router.push('/')

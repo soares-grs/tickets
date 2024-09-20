@@ -15,20 +15,20 @@ defineProps({
 </script>
 
 <template>
-    <div>
-        <Card style="width: 25rem; overflow: hidden">
-          <template #title>{{ title }}</template>
-          <template #content>
-            <p class="m-0">
-              {{ description }}
-            </p>
-          </template>
-          <template #footer>
-            <div class="flex gap-4 mt-1">
-              <Button label="Arquivar" severity="secondary" outlined class="w-full" />
-              <Button label="Concluir" class="w-full" />
-            </div>
-          </template>
-        </Card>
-    </div>
+  <div>
+    <Card class="p-2">
+      <template #title>{{ title }}</template>
+      <template #content>
+        <p class="">
+          {{ description }}
+        </p>
+      </template>
+      <template #footer>
+        <div class="flex gap-4 mt-1">
+          <Button severity="info" icon="pi pi-pen-to-square" outlined class="w-full" />
+          <Button severity="danger" icon="pi pi-trash" outlined class="w-full" />
+        </div>
+      </template>
+    </Card>
+  </div>
 </template>
