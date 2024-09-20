@@ -6,6 +6,7 @@ import TicketCard from '@/components/TicketCard.vue'
 import ScrollPanel from 'primevue/scrollpanel'
 import Timeline from 'primevue/timeline'
 import TicketViewMenu from '@/components/TicketViewMenu.vue'
+import ScrollTop from 'primevue/scrolltop'
 
 const tickets = ref<TicketResponse[]>([])
 
@@ -22,8 +23,8 @@ async function getAllTickets() {
 <template>
   <div class="flex flex-col justify-center items-center gap-2 mt-12">
     <TicketViewMenu />
-    <ScrollPanel style="width: 50%; height: 660px" class="p-5">
-      <Timeline align="alternate" :value="tickets">
+    <ScrollPanel style="width: 50%; height: 660px" class="p-5 mt-8">
+      <Timeline class="mt-12" align="alternate" :value="tickets">
         <template #content="slotProps">
           <TicketCard
             :title="slotProps.item.title"
@@ -32,6 +33,7 @@ async function getAllTickets() {
           />
         </template>
       </Timeline>
+      <ScrollTop target="parent" :threshold="10" icon="pi pi-arrow-up"/>
     </ScrollPanel>
   </div>
 </template>

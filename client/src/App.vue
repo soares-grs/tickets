@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import Toast from 'primevue/toast'
-import Menubar from 'primevue/menubar';
-import router from './router';
+import Menubar from 'primevue/menubar'
+import router from './router'
 
 const items = ref([
   {

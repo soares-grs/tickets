@@ -104,7 +104,7 @@ const confirmCreateTicket = (event: any) => {
         />
       </FloatLabel>
       <ConfirmPopup></ConfirmPopup>
-      <Button @click="confirmCreateTicket($event)" label="Criar Ticket" />
+      <Button @click="confirmCreateTicket($event)" icon="pi pi-ticket" label="Criar Ticket" />
     </form>
   </div>
 </template>
