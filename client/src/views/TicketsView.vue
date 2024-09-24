@@ -5,6 +5,7 @@ import axios from 'axios'
 import TicketViewMenu from '@/components/TicketViewMenu.vue'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
+import { formatDate } from '@/helpers/date'
 
 const datatable = ref()
 const tickets = ref<TicketResponse[]>([])
@@ -41,7 +42,11 @@ async function getAllTickets() {
       <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
       <Column field="title" header="Título"></Column>
       <Column field="description" header="Descrição"></Column>
-      <Column field="dateCreated" header="Data criação"></Column>
+      <Column field="dateCreated" header="Data criação">
+        <template #body="{ data }">
+          {{ formatDate(data.dateCreated) }}
+        </template></Column
+      >
     </DataTable>
   </div>
 </template>

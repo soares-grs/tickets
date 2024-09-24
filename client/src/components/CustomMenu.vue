@@ -35,7 +35,6 @@ const items = ref([
       <a v-ripple class="flex items-center" v-bind="props.action">
         <span :class="item.icon" />
         <span class="ml-2">{{ item.label }}</span>
-        <Badge v-if="item.badge" :class="{ 'ml-auto': !root, 'ml-2': root }" :value="item.badge" />
         <span
           v-if="item.shortcut"
           class="ml-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1"
@@ -49,12 +48,6 @@ const items = ref([
           ]"
         ></i>
       </a>
-    </template>
-    <template #end>
-      <div class="flex items-center gap-2">
-        <InputText placeholder="Search" type="text" class="w-32 sm:w-auto" />
-        <Avatar image="/images/avatar/amyelsner.png" shape="circle" />
-      </div>
     </template>
   </Menubar>
 </template>
