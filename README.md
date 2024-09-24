@@ -23,8 +23,8 @@ Este é um projeto de gerenciamento de tickets utilizando NestJS no backend e Vu
 1. **Clone o repositório:**
 
    ```bash
-   git clone https://github.com/usuario/repositorio.git
-   cd repositorio
+   git clone https://github.com/soares-grs/tickets.git
+   cd tickets
    ```
 
 2. **Construir e iniciar os contêineres:**
