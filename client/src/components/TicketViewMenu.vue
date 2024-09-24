@@ -3,7 +3,9 @@ import Toolbar from 'primevue/toolbar'
 import IconField from 'primevue/iconfield'
 import InputIcon from 'primevue/inputicon'
 import InputText from 'primevue/inputtext'
-import TicketCreateDialog from '@/components/TicketCreateDialog.vue';
+import TicketViewMenuCustomSplitButton from './TicketViewMenuCustomSplitButton.vue'
+
+const emit = defineEmits(['export'])
 </script>
 
 <template>
@@ -17,8 +19,8 @@ import TicketCreateDialog from '@/components/TicketCreateDialog.vue';
           <InputText placeholder="Buscar" />
         </IconField>
       </template>
-      <template #center>
-        <TicketCreateDialog/>
+      <template #end>
+        <TicketViewMenuCustomSplitButton @export="emit('export')" />
       </template>
     </Toolbar>
   </div>
