@@ -21,7 +21,7 @@ const items = [
 
 <template>
   <div class="card flex justify-center">
-    <SplitButton severity="success" label="Novo ticket" @click="visible = true" :model="items" />
+    <SplitButton severity="success" label="Novo" @click="visible = true" :model="items" />
     <Dialog v-model:visible="visible" modal header="Criar Ticket" :style="{ width: '25rem' }">
       <TicketForm @created="visible = false" />
     </Dialog>
