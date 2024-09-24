@@ -1,22 +1,16 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Ticket } from './ticket/ticket.entity';
 import { TicketModule } from './ticket/ticket.module';
+import { ConfigModule } from '@nestjs/config';
+import { DatabaseModule } from './config/database.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'root',
-      database: 'tickets',
-      entities: [Ticket],
-      synchronize: true,
+    ConfigModule.forRoot({
+      isGlobal: true,
     }),
+    DatabaseModule,
     TicketModule,
   ],
   controllers: [AppController],
