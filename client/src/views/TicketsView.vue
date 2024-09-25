@@ -55,6 +55,7 @@ function filterTickets(inputSearch: string) {
         <TicketViewMenu
           @search="(inputSearch: string) => filterTickets(inputSearch)"
           @export="exportCSV"
+          @ticket-created="getAllTickets"
         />
       </template>
       <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
@@ -66,11 +67,14 @@ function filterTickets(inputSearch: string) {
         </template></Column
       >
       <template #empty>
-         <span class="flex items-center gap-4">
+        <span class="flex items-center gap-4">
           Nenhum ticket encontrado
-          <i v-tooltip="'Para criar um novo ticket basta clicar no botão \u0022Novo\u0022'"  class="pi pi-info-circle cursor-pointer"></i>
-        </span> 
-        </template>
+          <i
+            v-tooltip="'Para criar um novo ticket basta clicar no botão \u0022Novo\u0022'"
+            class="pi pi-info-circle cursor-pointer"
+          ></i>
+        </span>
+      </template>
     </DataTable>
   </div>
 </template>

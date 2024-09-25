@@ -5,7 +5,7 @@ import InputIcon from 'primevue/inputicon'
 import InputText from 'primevue/inputtext'
 import TicketViewMenuCustomSplitButton from './TicketViewMenuCustomSplitButton.vue'
 
-const emit = defineEmits(['export', 'search'])
+const emit = defineEmits(['export', 'search', 'ticketCreated'])
 </script>
 
 <template>
@@ -20,7 +20,10 @@ const emit = defineEmits(['export', 'search'])
         </IconField>
       </template>
       <template #end>
-        <TicketViewMenuCustomSplitButton @export="emit('export')" />
+        <TicketViewMenuCustomSplitButton
+          @ticket-created="emit('ticketCreated')"
+          @export="emit('export')"
+        />
       </template>
     </Toolbar>
   </div>
