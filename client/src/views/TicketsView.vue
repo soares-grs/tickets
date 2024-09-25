@@ -9,6 +9,7 @@ import { formatDate } from '@/helpers/date'
 
 const datatable = ref()
 const tickets = ref<TicketResponse[]>([])
+const filteredTickets = ref<TicketResponse[]>([])
 const selectedTickets = ref([])
 
 onMounted(async () => {
@@ -22,6 +23,20 @@ const exportCSV = () => {
 async function getAllTickets() {
   const { data: ticketsResponse } = await axios.get(`${import.meta.env.VITE_BASE_URL}/ticket`)
   tickets.value = ticketsResponse
+  filteredTickets.value = tickets.value
+}
+
+function filterTickets(inputSearch: string) {
+  if (!inputSearch) {
+    filteredTickets.value = tickets.value
+    return
+  }
+
+  filteredTickets.value = tickets.value.filter(
+    (ticket) =>
+      ticket.description.toLowerCase().includes(inputSearch.toLowerCase()) ||
+      ticket.title.toLowerCase().includes(inputSearch.toLowerCase())
+  )
 }
 </script>
 
@@ -32,12 +47,15 @@ async function getAllTickets() {
       v-model:selection="selectedTickets"
       paginator
       :rows="10"
-      :value="tickets"
+      :value="filteredTickets"
       dataKey="id"
       tableStyle="min-width: 50rem"
     >
       <template #header>
-        <TicketViewMenu @export="exportCSV" />
+        <TicketViewMenu
+          @search="(inputSearch: string) => filterTickets(inputSearch)"
+          @export="exportCSV"
+        />
       </template>
       <Column selectionMode="multiple" headerStyle="width: 3rem"></Column>
       <Column field="title" header="Título"></Column>
@@ -47,6 +65,12 @@ async function getAllTickets() {
           {{ formatDate(data.dateCreated) }}
         </template></Column
       >
+      <template #empty>
+         <span class="flex items-center gap-4">
+          Nenhum ticket encontrado
+          <i v-tooltip="'Para criar um novo ticket basta clicar no botão \u0022Novo\u0022'"  class="pi pi-info-circle cursor-pointer"></i>
+        </span> 
+        </template>
     </DataTable>
   </div>
 </template>

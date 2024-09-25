@@ -5,7 +5,7 @@ import InputIcon from 'primevue/inputicon'
 import InputText from 'primevue/inputtext'
 import TicketViewMenuCustomSplitButton from './TicketViewMenuCustomSplitButton.vue'
 
-const emit = defineEmits(['export'])
+const emit = defineEmits(['export', 'search'])
 </script>
 
 <template>
@@ -16,7 +16,7 @@ const emit = defineEmits(['export'])
           <InputIcon>
             <i class="pi pi-search" />
           </InputIcon>
-          <InputText placeholder="Buscar" />
+          <InputText @input="emit('search', $event.target.value)" placeholder="Buscar" />
         </IconField>
       </template>
       <template #end>
