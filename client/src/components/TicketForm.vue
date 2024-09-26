@@ -8,7 +8,6 @@ import InputText from 'primevue/inputtext'
 import Textarea from 'primevue/textarea'
 import FloatLabel from 'primevue/floatlabel'
 import Button from 'primevue/button'
-import ConfirmPopup from 'primevue/confirmpopup'
 
 const emit = defineEmits(['created'])
 
@@ -103,7 +102,6 @@ const confirmCreateTicket = (event: any) => {
           cols="30"
         />
       </FloatLabel>
-      <ConfirmPopup></ConfirmPopup>
       <Button @click="confirmCreateTicket($event)" icon="pi pi-ticket" label="Criar Ticket" />
     </form>
   </div>
