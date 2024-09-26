@@ -3,7 +3,7 @@ import { useToast as useToastPrimVue } from 'primevue/usetoast'
 export const useToast = () => {
   const toast = useToastPrimVue()
 
-  const showSuccess = (message: string, detail: string) => {
+  const showSuccess = (message: string, detail: string = '') => {
     toast.add({ severity: 'success', summary: message, detail: detail, life: 3000 })
   }
 

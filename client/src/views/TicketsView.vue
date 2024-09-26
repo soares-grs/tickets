@@ -6,6 +6,12 @@ import TicketViewMenu from '@/components/TicketViewMenu.vue'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import { formatDate } from '@/helpers/date'
+import { useConfirm } from 'primevue/useconfirm'
+import ConfirmDialog from 'primevue/confirmdialog'
+import { useToast } from '@/helpers/toast'
+
+const confirm = useConfirm()
+const { showError, showSuccess } = useToast()
 
 const datatable = ref()
 const tickets = ref<TicketResponse[]>([])
@@ -38,6 +44,37 @@ function filterTickets(inputSearch: string) {
       ticket.title.toLowerCase().includes(inputSearch.toLowerCase())
   )
 }
+
+const removeTicket = async (ticketId: number) => {
+  try {
+    await axios.delete(`${import.meta.env.VITE_BASE_URL}/ticket/${ticketId}`)
+    showSuccess('Ticket removido com sucesso!')
+  } catch (e) {
+    showError('Não foi possível remover o ticket', e)
+  } finally {
+    await getAllTickets()
+  }
+}
+
+const confirmTicketRemotion = (ticketId: number) => {
+  confirm.require({
+    message: 'Tem certeza que deseja remover este ticket?',
+    header: 'Remoção Ticket',
+    icon: 'pi pi-exclamation-triangle',
+    rejectProps: {
+      label: 'Cancelar',
+      severity: 'secondary',
+      outlined: true
+    },
+    acceptProps: {
+      label: 'Sim'
+    },
+    accept: () => {
+      removeTicket(ticketId)
+    },
+    reject: () => {}
+  })
+}
 </script>
 
 <template>
@@ -64,8 +101,8 @@ function filterTickets(inputSearch: string) {
       <Column field="dateCreated" header="Data criação">
         <template #body="{ data }">
           {{ formatDate(data.dateCreated) }}
-        </template></Column
-      >
+        </template>
+      </Column>
       <template #empty>
         <span class="flex items-center gap-4">
           Nenhum ticket encontrado
@@ -75,6 +112,15 @@ function filterTickets(inputSearch: string) {
           ></i>
         </span>
       </template>
+      <Column>
+        <template #body="{ data }">
+          <i
+            @click="confirmTicketRemotion(data.id)"
+            class="mr-2 cursor-pointer text-red-500 hover:text-red-400 transition ease-linear duration-100 pi pi-trash"
+          ></i>
+        </template>
+      </Column>
     </DataTable>
   </div>
+  <ConfirmDialog></ConfirmDialog>
 </template>
