@@ -11,7 +11,14 @@ export class Ticket {
   @Column()
   description: string;
 
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  @Column({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+    transformer: {
+      to: (value: Date) => value,
+      from: (value: string) => new Date(value + 'Z'),
+    },
+  })
   dateCreated: Date;
 
   @Column({ default: false })
