@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Subject } from './../subject/subject.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Ticket {
@@ -20,6 +21,9 @@ export class Ticket {
     },
   })
   dateCreated: Date;
+
+  @ManyToOne(() => Subject, (subject) => subject.tickets)
+  subject: Subject;
 
   @Column({ default: false })
   isConcluded: boolean;
