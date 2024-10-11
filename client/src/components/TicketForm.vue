@@ -72,8 +72,8 @@ const confirmCreateTicket = (event: any) => {
     acceptProps: {
       label: 'Sim'
     },
-    accept: () => {
-      createTicket()
+    accept: async () => {
+      await createTicket()
     },
     reject: () => {}
   })

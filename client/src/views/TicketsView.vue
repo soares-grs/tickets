@@ -7,7 +7,6 @@ import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import { formatDate } from '@/helpers/date'
 import { useConfirm } from 'primevue/useconfirm'
-import ConfirmDialog from 'primevue/confirmdialog'
 import { useToast } from '@/helpers/toast'
 
 const confirm = useConfirm()
@@ -122,5 +121,4 @@ const confirmTicketRemotion = (ticketId: number) => {
       </Column>
     </DataTable>
   </div>
-  <ConfirmDialog></ConfirmDialog>
 </template>
